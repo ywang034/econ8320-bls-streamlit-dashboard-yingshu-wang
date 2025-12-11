@@ -45,7 +45,7 @@ def fetch_bls(start_year, end_year):
     df = pd.DataFrame(all_rows)
     df["date"] = pd.to_datetime(df[["year", "month"]].assign(day=1))
 
-    return df.sort_values("date")
+    return df.sort_values("series_id")
 
 if __name__ == "__main__":
     df = fetch_bls(2020, datetime.now().year)
