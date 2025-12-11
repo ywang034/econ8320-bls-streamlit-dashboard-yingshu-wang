@@ -45,8 +45,9 @@ def fetch_bls(start_year, end_year):
     df = pd.DataFrame(all_rows)
     df["date"] = pd.to_datetime(df[["year", "month"]].assign(day=1))
 
-    return df.sort_values("series_id")
+    return return df.sort_values(["series_id","date"]).reset_index(drop=True)
 
 if __name__ == "__main__":
-    df = fetch_bls(2020, datetime.now().year)
+    current_year = datetime.now().year
+    df = fetch_bls(2020, current_year)
     df.to_csv("data/bls_data.csv", index=False)
