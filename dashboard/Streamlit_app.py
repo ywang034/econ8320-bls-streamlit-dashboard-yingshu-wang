@@ -2,11 +2,14 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+# Dashboard Title
 st.title("U.S. Labor Market Dashboard (2020–Present)")
-st.write("Trends across unemployment, employment, working hours, and wages.")
+st.write("This dashboard visualizes selected labor statistics data series from the US Bureau of Labor Statistics (BLS). The dashboard will 
+focus on the period from January 2020 to the most recently available data. This time range captures the dramatic shifts in employment, 
+unemployment, working hours, and wages during the pandemic and the recovery trend in recent years.")
 
-# Load dataset from GitHub
-df = pd.read_csv("https://raw.githubusercontent.com/YOUR_USERNAME/bls-labor-dashboard/main/data/bls_data.csv")
+# Load dataset
+df = pd.read_csv("data/bls_data.csv")
 
 df["date"] = pd.to_datetime(df["date"])
 
