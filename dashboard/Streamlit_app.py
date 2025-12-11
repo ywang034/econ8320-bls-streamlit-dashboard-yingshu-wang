@@ -5,37 +5,77 @@ import altair as alt
 # Dashboard Title
 st.title("U.S. Labor Market Dashboard (2020–Present)")
 st.markdown("""
-This dashboard visualizes selected labor statistics data series from the US Bureau of Labor Statistics (BLS). The dashboard will 
-focus on the period from January 2020 to the most recently available data. This time range captures the dramatic shifts in employment, 
-unemployment, working hours, and wages during the pandemic and the recovery trend in recent years.
+This dashboard visualizes selected labor statistics from the US Bureau of Labor Statistics (BLS), 
+focusing on trends since the COVID-19 pandemic and the subsequent recovery period.
 """)
 
 # Load dataset
 df = pd.read_csv("data/bls_data.csv")
-
 df["date"] = pd.to_datetime(df["date"])
 
-# User selects which series to view
-series_options = df["series_name"].unique()
+# Year range slider
+
+min_year = df["date"].dt.year.min()
+max_year = df["date"].dt.year.max()
+
+year_range = st.slider(
+    "📅 Select Year Range:",
+    min_year, max_year, (min_year, max_year)
+)
+
+# Filter dataframe by year range
+df_filtered = df[(df["date"].dt.year >= year_range[0]) &
+                 (df["date"].dt.year <= year_range[1])]
+
+
+# Series selector
+
+series_options = df_filtered["series_name"].unique()
 selected = st.selectbox("🔍 Select a Series to Visualize:", series_options)
 
-plot_df = df[df["series_name"] == selected]
+plot_df = df_filtered[df_filtered["series_name"] == selected]
+
 
 # Create Altair chart
-chart = alt.Chart(plot_df).mark_line().encode(
-    x="date:T",
-    y="value:Q",
-    tooltip=["date:T", "value:Q"]
-).properties(height=400)
 
-# Add shaded COVID periods
-pandemic_bands = alt.Chart(pd.DataFrame({
-    "start": ["2020-03-01", "2022-01-01"],
-    "end": ["2021-12-01", "2025-01-01"],
-    "label": ["Pandemic", "Post-Pandemic"]
-})).mark_rect(opacity=0.15, color="red").encode(
-    x="start:T",
-    x2="end:T"
+chart = (
+    alt.Chart(plot_df)
+    .mark_line()
+    .encode(
+        x=alt.X("date:T", title="Date"),
+        y=alt.Y("value:Q", title=selected),
+        tooltip=["date:T", "value:Q"]
+    )
+    .properties(
+        height=400,
+        title=f"{selected} ({year_range[0]}–{year_range[1]})"
+    )
 )
+
+
+# Shaded pandemic periods
+
+
+pandemic_periods = pd.DataFrame({
+    "start": ["2020-03-01", "2022-01-01"],
+    "end":   ["2021-12-01", "2025-01-01"],
+    "label": ["Pandemic", "Post-Pandemic"],
+    "color": ["#ff9999", "#b3ffcc"]  # Light red, light green
+})
+
+pandemic_bands = (
+    alt.Chart(pandemic_periods)
+    .mark_rect(opacity=0.25)
+    .encode(
+        x="start:T",
+        x2="end:T",
+        color=alt.Color("label:N", scale=alt.Scale(
+            domain=["Pandemic", "Post-Pandemic"],
+            range=["#ff9999", "#b3ffcc"]
+        ))
+    )
+)
+
+# Display chart
 
 st.altair_chart(pandemic_bands + chart, use_container_width=True)
