@@ -17,7 +17,7 @@ df["date"] = pd.to_datetime(df["date"])
 
 # User selects which series to view
 series_options = df["series_name"].unique()
-selected = st.selectbox("Select a labor market indicator:", series_options)
+selected = st.selectbox("🔍 Select a Series to Visualize:", series_options)
 
 plot_df = df[df["series_name"] == selected]
 
