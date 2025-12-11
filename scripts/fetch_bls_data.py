@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-API_KEY = ""  # optional – you can leave empty
+API_KEY = ""
 
 SERIES_IDS = {
     "LNS14000000": "Unemployment Rate",
@@ -32,7 +32,7 @@ def fetch_bls(start_year, end_year):
         name = SERIES_IDS[sid]
 
         for d in series["data"]:
-            if d["period"][0] != "M":  # skip annual averages
+            if d["period"][0] != "M":
                 continue
             all_rows.append({
                 "series_id": sid,
