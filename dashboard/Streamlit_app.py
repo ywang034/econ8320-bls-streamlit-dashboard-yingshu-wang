@@ -20,7 +20,7 @@ max_year = df["date"].dt.year.max()
 
 st.subheader("📅 Select Year Range:")
 year_range = st.slider(
-min_year, max_year, (min_year, max_year)
+    min_year, max_year, (min_year, max_year)
 )
 
 # Filter dataframe by year range
