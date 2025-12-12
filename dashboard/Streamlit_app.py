@@ -18,9 +18,9 @@ df["date"] = pd.to_datetime(df["date"])
 min_year = df["date"].dt.year.min()
 max_year = df["date"].dt.year.max()
 
+st.subheader("📅 Select Year Range:")
 year_range = st.slider(
-    "📅 Select Year Range:",
-    min_year, max_year, (min_year, max_year)
+min_year, max_year, (min_year, max_year)
 )
 
 # Filter dataframe by year range
