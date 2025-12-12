@@ -20,7 +20,7 @@ max_year = df["date"].dt.year.max()
 
 st.subheader("📅 Select Year Range")
 year_range = st.slider(
-    "Select Year Range:",
+    "Year Range:",
     min_year, max_year, (min_year, max_year)
 )
 
@@ -34,7 +34,7 @@ df_filtered = df[(df["date"].dt.year >= year_range[0]) &
 
 st.subheader("🔍 Select a Series to Visualize")
 series_options = df_filtered["series_name"].unique()
-selected = st.selectbox("Select a Labor Statistic Series:", series_options)
+selected = st.selectbox("Labor Statistic Series:", series_options)
 
 plot_df = df_filtered[df_filtered["series_name"] == selected]
 
