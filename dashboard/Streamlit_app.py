@@ -48,7 +48,7 @@ chart = (
     )
     .properties(
         height=400,
-        title=f"{selected} ({year_range[0]}–{year_range[1]})"
+        title=f"Trends for {selected} ({year_range[0]}–{year_range[1]})"
     )
 )
 
