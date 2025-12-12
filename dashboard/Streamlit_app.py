@@ -79,3 +79,16 @@ pandemic_bands = (
 # Display chart
 
 st.altair_chart(pandemic_bands + chart, use_container_width=True)
+
+# Add data download button
+
+st.subheader("📥 Download Raw Data")
+
+csv_data = df.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="Download BLS Data (CSV)",
+    data=csv_data,
+    file_name="bls_data.csv",
+    mime="text/csv"
+)
