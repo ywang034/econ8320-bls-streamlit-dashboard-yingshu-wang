@@ -32,8 +32,9 @@ df_filtered = df[(df["date"].dt.year >= year_range[0]) &
 
 # Series selector
 
+st.subheader("🔍 Select a Series to Visualize")
 series_options = df_filtered["series_name"].unique()
-selected = st.selectbox("🔍 Select a Series to Visualize:", series_options)
+selected = st.selectbox("Select a Labor Statistic Series:", series_options)
 
 plot_df = df_filtered[df_filtered["series_name"] == selected]
 
