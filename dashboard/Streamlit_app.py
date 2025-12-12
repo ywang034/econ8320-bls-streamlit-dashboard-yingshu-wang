@@ -3,9 +3,9 @@ import pandas as pd
 import altair as alt
 
 # Dashboard Title
-st.title("U.S. Labor Market Dashboard (2020–Present)")
+st.title("📈U.S. Labor Market Dashboard (2020–Present)")
 st.markdown("""
-This dashboard visualizes selected labor statistics from the US Bureau of Labor Statistics (BLS), 
+This dashboard visualizes selected labor statistics from the **US Bureau of Labor Statistics (BLS)**, 
 focusing on trends since the COVID-19 pandemic and the subsequent recovery period.
 """)
 
