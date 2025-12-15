@@ -4,14 +4,43 @@ import altair as alt
 
 # Dashboard Title
 st.title("📈U.S. Labor Market Dashboard (2020–Present)")
-st.markdown("""
-This dashboard visualizes selected labor statistics from the **US Bureau of Labor Statistics (BLS)**, 
-focusing on trends since the COVID-19 pandemic and the subsequent recovery period.
-""")
 
 # Load dataset
 df = pd.read_csv("data/bls_data.csv")
 df["date"] = pd.to_datetime(df["date"])
+
+# Add sidebar
+st.sidebar.title("📊 Project Information")
+
+st.sidebar.markdown("### Data Source")
+st.sidebar.markdown("""
+The data comes directly from the BLS API and is automatically updated using GitHub Actions.
+U.S. Bureau of Labor Statistics (BLS)  
+https://www.bls.gov/
+""")
+
+st.sidebar.markdown("### Data Series Included")
+st.sidebar.markdown("""
+- **Unemployment Rate**  
+- **Total Nonfarm Employment**  
+- **Avg Weekly Hours (Private)**  
+- **Avg Hourly Earnings (Private)**
+""")
+# Calculate time range dynamically from data
+start_date = df["date"].min().strftime("%B %Y")
+end_date = df["date"].max().strftime("%B %Y")
+
+st.sidebar.markdown("### Time Range")
+st.sidebar.markdown(f"""
+{start_date} – {end_date}
+""")
+
+st.sidebar.markdown("### About This Dashboard")
+st.sidebar.markdown("""
+This dashboard visualizes key U.S. labor market indicators
+to illustrate changes during the COVID-19 pandemic and the
+subsequent recovery period.
+""")
 
 # Year range slider
 
