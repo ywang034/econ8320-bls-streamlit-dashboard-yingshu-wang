@@ -15,6 +15,7 @@ st.sidebar.title("📊 Project Information")
 st.sidebar.markdown("### Data Source")
 st.sidebar.markdown("""
 **The data comes directly from the BLS API and is automatically updated using GitHub Actions.**
+
 U.S. Bureau of Labor Statistics (BLS)  
 https://www.bls.gov/
 """)
