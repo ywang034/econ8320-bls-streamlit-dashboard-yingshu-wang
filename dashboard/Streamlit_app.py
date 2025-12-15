@@ -14,17 +14,17 @@ st.sidebar.title("📊 Project Information")
 
 st.sidebar.markdown("### Data Source")
 st.sidebar.markdown("""
-The data comes directly from the BLS API and is automatically updated using GitHub Actions.
+**The data comes directly from the BLS API and is automatically updated using GitHub Actions.**
 U.S. Bureau of Labor Statistics (BLS)  
 https://www.bls.gov/
 """)
 
 st.sidebar.markdown("### Data Series Included")
 st.sidebar.markdown("""
-- **Unemployment Rate**  
-- **Total Nonfarm Employment**  
-- **Avg Weekly Hours (Private)**  
-- **Avg Hourly Earnings (Private)**
+- Unemployment Rate  
+- Total Nonfarm Employment  
+- Avg Weekly Hours (Private)  
+- Avg Hourly Earnings (Private)
 """)
 # Calculate time range dynamically from data
 start_date = df["date"].min().strftime("%B %Y")
